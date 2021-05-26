@@ -48,7 +48,7 @@ public class ExpenseControllerTest {
     }
 
     @Test
-    public void postExpense() throws Exception {
+    public void postExpenseHappyFlow() throws Exception {
         when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
         String json = "{\"client_id\" : 1234, \"date\" : \"2021-05-23T18:25:43.511Z\", \"amount\" : 67.45}";
         this.mockMvc.perform(post("/expenses")
@@ -59,4 +59,43 @@ public class ExpenseControllerTest {
                         .isCreated())
                 .andExpect(content().string(containsString("123")));
     }
+
+    @Test
+    public void postExpenseWrongDecimalSeparatorReturn400() throws Exception {
+        //when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
+        String json = "{ \"date\" : \"2021-05-23T18:25:43.511Z\", \"amount\" : \"67,45\"}";
+        this.mockMvc.perform(post("/expenses")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andDo(print())
+                .andExpect(status()
+                        .isBadRequest());
+    }
+
+    @Test
+    public void postExpenseWrongDateReturn400() throws Exception {
+        //when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
+        String json = "{ \"date\" : \"2021-23-mayT18:25:43.511Z\", \"amount\" : \"67,45\"}";
+        this.mockMvc.perform(post("/expenses")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andDo(print())
+                .andExpect(status()
+                        .isBadRequest());
+    }
+
+    @Test
+    public void postExpenseWrongMethodReturn405() throws Exception {
+        //when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
+        String json = "{ \"date\" : \"2021-23-mayT18:25:43.511Z\", \"amount\" : \"67,45\"}";
+        this.mockMvc.perform(post("/expenses")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andDo(print())
+                .andExpect(status()
+                        .isBadRequest());
+    }
+
+    //required json property is not working
+    //2021-23-23T18:25:43.511Z is an accpetable date
 }
