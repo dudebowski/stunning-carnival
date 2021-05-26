@@ -1,5 +1,6 @@
 package com.kdb.expenses.web;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -9,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.kdb.expenses.service.IExpenseService;
 import com.kdb.expenses.service.dto.ExpenseDTO;
 import org.junit.jupiter.api.Test;
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,14 +49,14 @@ public class ExpenseControllerTest {
 
     @Test
     public void postExpense() throws Exception {
-        when(service.CreateExpenseRecord(new ExpenseDTO())).thenReturn(123l);
-        String json = "{\"client_id\" : 1234, \"date\" : '2021-05-23T18:25:43.511Z', \"amount\" : 67.45}";
+        when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
+        String json = "{\"client_id\" : 1234, \"date\" : \"2021-05-23T18:25:43.511Z\", \"amount\" : 67.45}";
         this.mockMvc.perform(post("/expenses")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andDo(print())
                 .andExpect(status()
-                        .isOk())
+                        .isCreated())
                 .andExpect(content().string(containsString("123")));
     }
 }
