@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @RestController
@@ -18,7 +19,7 @@ public class ExpenseController {
     public IExpenseService service = new ExpenseService();
 
     @GetMapping("/expenses/client/{id}")
-    public BigDecimal getExpenses(@PathVariable long id) {
+    public List<ExpenseDTO> getExpenses(@PathVariable long id) {
         return service.GetExpensesForClient(id);
     }
 

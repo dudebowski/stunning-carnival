@@ -3,8 +3,9 @@ package com.kdb.expenses.service;
 import com.kdb.expenses.service.dto.ExpenseDTO;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface IExpenseService {
     public Long CreateExpenseRecord(ExpenseDTO expense);
-    public BigDecimal GetExpensesForClient(long clientID);
+    public List<ExpenseDTO> GetExpensesForClient(long clientID);
 }

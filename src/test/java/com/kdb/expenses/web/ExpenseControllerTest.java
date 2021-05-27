@@ -4,13 +4,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.kdb.expenses.service.IExpenseService;
 import com.kdb.expenses.service.dto.ExpenseDTO;
 import org.junit.jupiter.api.Test;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,10 +18,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc//(addFilters = false)
@@ -37,14 +37,22 @@ public class ExpenseControllerTest {
     private IExpenseService service;
 
     @Test
-    public void getExpenseShouldReturnAmount() throws Exception {
-        when(service.GetExpensesForClient(20)).thenReturn(new BigDecimal(289.67));
+    public void getExpenseShouldReturnList() throws Exception {
+        List<ExpenseDTO> dtos = new ArrayList() {{
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(26.33)));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
+        }};
+
+        when(service.GetExpensesForClient(20)).thenReturn(dtos);
 
         this.mockMvc.perform(get("/expenses/client/20"))
                 .andDo(print())
                 .andExpect(status()
-                        .isOk())
-                .andExpect(content().string(containsString("289.67")));
+                        .isOk());
+//                  .andExpect((ResultMatcher) jsonPath("$.length()").value(dtos.size()));
     }
 
     @Test
@@ -62,7 +70,6 @@ public class ExpenseControllerTest {
 
     @Test
     public void postExpenseWrongDecimalSeparatorReturn400() throws Exception {
-        //when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
         String json = "{ \"date\" : \"2021-05-23T18:25:43.511Z\", \"amount\" : \"67,45\"}";
         this.mockMvc.perform(post("/expenses")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -74,7 +81,6 @@ public class ExpenseControllerTest {
 
     @Test
     public void postExpenseWrongDateReturn400() throws Exception {
-        //when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
         String json = "{ \"date\" : \"2021-23-mayT18:25:43.511Z\", \"amount\" : \"67,45\"}";
         this.mockMvc.perform(post("/expenses")
                 .contentType(MediaType.APPLICATION_JSON)
