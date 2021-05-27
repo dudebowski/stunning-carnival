@@ -3,68 +3,26 @@
 ## GOAL
 Create an Expenses SpringBoot service. It holds expenses information for all
 clients (date, amount spent).
+
 Endpoints exposed:
-POST /expense → create an expense record
-GET /expenses/client/{id} → return a list of all the expenses for a client
+POST /client → create a user  
+GET /client/{id} → show the name of the client  
+GET /client/{id}/expenses/total → show a total of all the expenses of the
+client
 
-NOTE: springboot is quite new to me  
+## prereq
+Next to experience with maven and Java some experience with developing rest API's with springboot is expected.   
 
-## The plan 
-The idea is to create an API with three layers
-- web
-  The controller for responding to the API requests
-- service
-  The business service and DTO.  
-  The service wil implement the creation of an expense recorde and the retrieval of the list of expenses per client
-- domain  
-  The domainmodel (just a list of expenses).
-  A repository  is used to access the domain classes
-  given time create a datamodel where a client hold a list of expenses
+This API uses :
+JAVA 11
+Maven 3.8.1
+Springboot 2.5.0
 
-## steps
+## test
+Command `mvn test` will run all the unit tests
 
-1. create project with initializer   
-I only used dependencie **springweb**, When time allows I will add **H2 database** and **spring security**
+## run
+Start application by executing  `mvn spring-boot:run`
 
-2. add controller tests
-Happy flow test with mocks for the service
-Also a smoke test was added to check if the application will startup
-
-3. implement controller
-All test should succeed
-
-4. More testing for not happy flow
-    - wrong dates
-    - wrong httpMethod
-    - wrong amount
-    - ..
-
-5. Implement and test service 
-
-    - refactored wrong implemented function, total expense should be in client service , not in expense service
-    - create test
-    - mock repository
-    - run test
-    - implemented hardcode repository (should have been done later :-))
-    
-6. Aw test are failing (total not correct) 
-    - fixed creation big decimal
-
-7. Create postman integration test
-    - A bug in repo
-    
-8. Create client project and clientcontroller
-
-9. Add domain classes
-     - No unit tests since I wanted to implement the API call to expenses (I know bad idea)
-     - Added repository with hard code data
-     - Connected the service
-     - No unit tests since I wanted to implement the API call to expenses (I know bad idea)
-
-10. Call to expenses
-## Quircks
-  - looks like required json property is not working
-  - 2021-23-23T18:25:43.511Z is an acceptable date
-
-
-   
+application can be accessed by localhost:8092.
+The port can be altered in the application.properties
