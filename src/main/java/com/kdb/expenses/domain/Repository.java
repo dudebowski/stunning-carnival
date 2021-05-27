@@ -16,7 +16,7 @@ public class Repository implements IRepository {
     @Override
     public List<ExpenseEntity> GetExpensesByClientId(Long clientId) {
         return getData().stream()
-                .filter(d -> d.getClientID() == 20l)
+                .filter(d -> d.getClientID() == clientId)
                 .collect(Collectors.toList());
     }
 

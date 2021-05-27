@@ -50,6 +50,8 @@ All test should succeed
 6. Aw test are failing (total not correct) 
     - fixed creation big decimal
 
+7. Create postman integration test
+    -A bug je in repo
     
 
     //required json property is not working
