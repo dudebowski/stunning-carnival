@@ -51,9 +51,20 @@ All test should succeed
     - fixed creation big decimal
 
 7. Create postman integration test
-    -A bug je in repo
+    - A bug in repo
     
+8. Create client project and clientcontroller
 
-    //required json property is not working
-    //2021-23-23T18:25:43.511Z is an acceptable date
+9. Add domain classes
+     - No unit tests since I wanted to implement the API call to expenses (I know bad idea)
+     - Added repository with hard code data
+     - Connected the service
+     - No unit tests since I wanted to implement the API call to expenses (I know bad idea)
+
+10. Call to expenses
+## Quircks
+  - looks like required json property is not working
+  - 2021-23-23T18:25:43.511Z is an acceptable date
+
+
    

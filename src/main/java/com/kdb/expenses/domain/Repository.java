@@ -25,7 +25,7 @@ public class Repository implements IRepository {
         return null;
     }
 
-    public List<ExpenseEntity> getData() {
+    private static List<ExpenseEntity> getData() {
         List<ExpenseEntity> data = new ArrayList() {{
             add(new ExpenseEntity(44L, 20L, Calendar.getInstance().getTime(), new BigDecimal("34.89")));
             add(new ExpenseEntity(45L, 20L, Calendar.getInstance().getTime(), new BigDecimal("134.17")));

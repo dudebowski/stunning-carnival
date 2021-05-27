@@ -52,7 +52,6 @@ public class ExpenseControllerTest {
                 .andDo(print())
                 .andExpect(status()
                         .isOk());
-//                  .andExpect((ResultMatcher) jsonPath("$.length()").value(dtos.size()));
     }
 
     @Test
