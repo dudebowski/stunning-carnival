@@ -38,6 +38,18 @@ All test should succeed
     - wrong httpMethod
     - wrong amount
     - ..
+
+5. Implement and test service 
+
+    - refactored wrong implemented function, total expense should be in client service , not in expense service
+    - create test
+    - mock repository
+    - run test
+    - implemented hardcode repository (should have been done later :-))
+    
+6. Aw test are failing (total not correct) 
+    - fixed creation big decimal
+
     
 
     //required json property is not working

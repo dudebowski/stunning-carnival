@@ -39,11 +39,11 @@ public class ExpenseControllerTest {
     @Test
     public void getExpenseShouldReturnList() throws Exception {
         List<ExpenseDTO> dtos = new ArrayList() {{
-            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
-            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(26.33)));
-            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
-            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
-            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal("34.89")));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal("26.33")));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal("34.89")));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal("34.89")));
+            add (new ExpenseDTO(20L, Calendar.getInstance().getTime(), new BigDecimal("34.89")));
         }};
 
         when(service.GetExpensesForClient(20)).thenReturn(dtos);
@@ -58,7 +58,7 @@ public class ExpenseControllerTest {
     @Test
     public void postExpenseHappyFlow() throws Exception {
         when(service.CreateExpenseRecord(any(ExpenseDTO.class))).thenReturn(123l);
-        String json = "{\"client_id\" : 1234, \"date\" : \"2021-05-23T18:25:43.511Z\", \"amount\" : 67.45}";
+        String json = "{\"client_id\" : 1234, \"date\" : \"2021-05-23T18:25:43.511Z\", \"amount\" : \"67.45\"}";
         this.mockMvc.perform(post("/expenses")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))

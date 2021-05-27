@@ -27,14 +27,14 @@ public class Repository implements IRepository {
 
     public List<ExpenseEntity> getData() {
         List<ExpenseEntity> data = new ArrayList() {{
-            add(new ExpenseEntity(44L, 20L, Calendar.getInstance().getTime(), new BigDecimal(34.89)));
-            add(new ExpenseEntity(45L, 20L, Calendar.getInstance().getTime(), new BigDecimal(134.17)));
-            add(new ExpenseEntity(46L, 20L, Calendar.getInstance().getTime(), new BigDecimal(124.45)));
-            add(new ExpenseEntity(47L, 20L, Calendar.getInstance().getTime(), new BigDecimal(88.83)));
-            add(new ExpenseEntity(47L, 30L, Calendar.getInstance().getTime(), new BigDecimal(55.66)));
-            add(new ExpenseEntity(49L, 30L, Calendar.getInstance().getTime(), new BigDecimal(36.77)));
-            add(new ExpenseEntity(50L, 40L, Calendar.getInstance().getTime(), new BigDecimal(123.45)));
-            add(new ExpenseEntity(51L, 55l, Calendar.getInstance().getTime(), new BigDecimal(879.33)));
+            add(new ExpenseEntity(44L, 20L, Calendar.getInstance().getTime(), new BigDecimal("34.89")));
+            add(new ExpenseEntity(45L, 20L, Calendar.getInstance().getTime(), new BigDecimal("134.17")));
+            add(new ExpenseEntity(46L, 20L, Calendar.getInstance().getTime(), new BigDecimal("124.45")));
+            add(new ExpenseEntity(47L, 20L, Calendar.getInstance().getTime(), new BigDecimal("88.83")));
+            add(new ExpenseEntity(47L, 30L, Calendar.getInstance().getTime(), new BigDecimal("55.66")));
+            add(new ExpenseEntity(49L, 30L, Calendar.getInstance().getTime(), new BigDecimal("36.77")));
+            add(new ExpenseEntity(50L, 40L, Calendar.getInstance().getTime(), new BigDecimal("123.45")));
+            add(new ExpenseEntity(51L, 55l, Calendar.getInstance().getTime(), new BigDecimal("879.33")));
         }};
         return data;
     }
